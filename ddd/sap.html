@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сапаттуу билим - Заманбап билим берүү</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --primary: #2563EB;
+            --secondary: #EC4899;
+            --accent: #10B981;
+            --orange: #F59E0B;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --gradient-blue: linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%);
+            --gradient-pink: linear-gradient(135deg, #EC4899 0%, #BE185D 100%);
+            --gradient-green: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-orange: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 20px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 20px 80px;
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        
+        .hero-content .highlight {
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image-circle {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(37, 99, 235, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card:nth-child(2) .stat-number {
+            background: var(--gradient-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .stat-card:nth-child(3) .stat-number {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #64748B;
+            font-size: 0.95rem;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Section */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: #64748B;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Programs Section */
+        .programs-section {
+            background: white;
+        }
+        
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+        }
+        
+        .program-card {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            transform: translate(50%, -50%);
+            transition: all 0.4s ease;
+        }
+        
+        .program-card:hover::before {
+            width: 250px;
+            height: 250px;
+        }
+        
+        .program-card:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+        
+        .program-card:nth-child(2)::before {
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);
+        }
+        
+        .program-card:nth-child(3) {
+            border-left-color: var(--accent);
+        }
+        
+        .program-card:nth-child(3)::before {
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+        }
+        
+        .program-card:nth-child(4) {
+            border-left-color: var(--orange);
+        }
+        
+        .program-card:nth-child(4)::before {
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+        }
+        
+        .program-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .program-card:nth-child(2) .program-icon {
+            background: var(--gradient-pink);
+        }
+        
+        .program-card:nth-child(3) .program-icon {
+            background: var(--gradient-green);
+        }
+        
+        .program-card:nth-child(4) .program-icon {
+            background: var(--gradient-orange);
+        }
+        
+        .program-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .program-card p {
+            color: #64748B;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Teachers Section */
+        .teachers-section {
+            background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+        }
+        
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .teacher-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .teacher-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-blue);
+            border-radius: 20px 20px 0 0;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .teacher-card:nth-child(2)::before { background: var(--gradient-pink); }
+        .teacher-card:nth-child(3)::before { background: var(--gradient-green); }
+        .teacher-card:nth-child(4)::before { background: var(--gradient-orange); }
+        
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .teacher-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .teacher-card:nth-child(2) .teacher-avatar {
+            background: var(--gradient-pink);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+        
+        .teacher-card:nth-child(3) .teacher-avatar {
+            background: var(--gradient-green);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        .teacher-card:nth-child(4) .teacher-avatar {
+            background: var(--gradient-orange);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+        
+        .teacher-card h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        
+        .teacher-card p {
+            color: #64748B;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        /* Results Section */
+        .results-section {
+            background: var(--dark);
+            color: white;
+        }
+        
+        .results-section .section-label {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            color: white;
+        }
+        
+        .results-section .section-title {
+            color: white;
+        }
+        
+        .results-section .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 45px 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .result-card:hover::before {
+            opacity: 1;
+        }
+        
+        .result-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .result-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .result-card:nth-child(2) .result-number {
+            background: var(--gradient-pink);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .result-card:nth-child(3) .result-number {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .result-card:nth-child(4) .result-number {
+            background: var(--gradient-orange);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        
+        .result-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .result-card p {
+            opacity: 0.9;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            color: #64748B;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary,
+        .btn-secondary {
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-blue);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">📚 Билим Берүү</div>
+            <ul class="nav-links">
+                <li><a href="#programs">Программалар</a></li>
+                <li><a href="#teachers">Мугалимдер</a></li>
+                <li><a href="#results">Натыйжалар</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    <span class="highlight">Сапаттуу</span> билим берүү
+                </h1>
+                <p>
+                    Окуучулардын билим алуудагы муктаждыктарын толук камсыз кылган, заманбап окуу программаларына, 
+                    инновациялык методдорго жана жогорку квалификациялуу мугалимдерге таянган билим берүү процесси
+                </p>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-circle">🎓</div>
+            </div>
+        </div>
+        <div class="stats-grid container" style="margin-top: 60px;">
+            <div class="stat-card fade-in">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Квалификациялуу мугалимдер</div>
+            </div>
+            <div class="stat-card fade-in" style="animation-delay: 0.2s">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Онлайн колдоо</div>
+            </div>
+            <div class="stat-card fade-in" style="animation-delay: 0.4s">
+                <div class="stat-number">5★</div>
+                <div class="stat-label">Баалоо</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Programs Section -->
+    <section class="programs-section" id="programs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Заманбап программалар</span>
+                <h2 class="section-title">Заманбап окуу программалары</h2>
+                <p class="section-description">
+                    Окуучулардын логикалык ой жүгүртүүсүн, чыгармачылык жөндөмүн жана практикалык көндүмдөрүн өнүктүрүүгө багытталган программалар
+                </p>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card fade-in">
+                    <div class="program-icon">🌍</div>
+                    <h3>Эл аралык стандарттарга ылайык</h3>
+                    <p>Биздин программалар эл аралык билим берүү стандарттарына толук шайкеш келет жана жаңыланып турат</p>
+                </div>
+                
+                <div class="program-card fade-in" style="animation-delay: 0.1s">
+                    <div class="program-icon">🔬</div>
+                    <h3>Теория жана практика</h3>
+                    <p>Теориялык билимдерди практикалык тажрыйба менен тыгыз айкалыштыруу</p>
+                </div>
+                
+                <div class="program-card fade-in" style="animation-delay: 0.2s">
+                    <div class="program-icon">💻</div>
+                    <h3>Санариптик ресурстар</h3>
+                    <p>Интерактивдүү материалдар, видео сабактар жана онлайн ресурстарды колдонуу</p>
+                </div>
+                
+                <div class="program-card fade-in" style="animation-delay: 0.3s">
+                    <div class="program-icon">🎯</div>
+                    <h3>Өз алдынча билим алуу</h3>
+                    <p>Окуучунун өз алдынча изденүүсүнө жана билим алуусуна шарт түзүү</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Teachers Section -->
+    <section class="teachers-section" id="teachers">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Биздин күч</span>
+                <h2 class="section-title">Жогорку квалификациялуу мугалимдер</h2>
+                <p class="section-description">
+                    Өз предметин терең билген, заман талабына ылайык окутуу ыкмаларын колдонгон жана окуучунун жеке өзгөчөлүктөрүн эске алган адистер
+                </p>
+            </div>
+            
+            <div class="teachers-grid">
+                <div class="teacher-card fade-in">
+                    <div class="teacher-avatar">📚</div>
+                    <h4>Үзгүлтүксүз өнүгүү</h4>
+                    <p>Туруктуу түрдө квалификациясын жогорулатуу жана жаңы билимдерди үйрөнүү</p>
+                </div>
+                
+                <div class="teacher-card fade-in" style="animation-delay: 0.1s">
+                    <div class="teacher-avatar">💡</div>
+                    <h4>Заманбап технологиялар</h4>
+                    <p>Заманбап педагогикалык технологияларды жана ыкмаларды активдүү колдонуу</p>
+                </div>
+                
+                <div class="teacher-card fade-in" style="animation-delay: 0.2s">
+                    <div class="teacher-avatar">🤝</div>
+                    <h4>Ачык байланыш</h4>
+                    <p>Окуучулар менен ачык, ишенимдүү жана өнүктүрүүчү байланыш түзүү</p>
+                </div>
+                
+                <div class="teacher-card fade-in" style="animation-delay: 0.3s">
+                    <div class="teacher-avatar">⭐</div>
+                    <h4>Сапатка көңүл буруу</h4>
+                    <p>Билим берүүнүн сапатына өзгөчө көңүл буруу жана жоопкерчилик</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section class="results-section" id="results">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Биздин жетишкендиктер</span>
+                <h2 class="section-title">Сапаттуу билим берүүнүн натыйжалары</h2>
+                <p class="section-description">
+                    Тажрыйбалуу мугалимдер, заманбап программалар жана инновациялык ыкмалардын натыйжасында пайда болгон жетишкендиктер
+                </p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-card fade-in">
+                    <div class="result-number">01</div>
+                    <h3>Билим деңгээли жогорулайт</h3>
+                    <p>Окуучулардын билим деңгээли олуттуу жогорулап, мыкты натыйжаларга жетишет</p>
+                </div>
+                
+                <div class="result-card fade-in" style="animation-delay: 0.1s">
+                    <div class="result-number">02</div>
+                    <h3>Жоопкерчиликтүү инсандар</h3>
+                    <p>Өз алдынча ой жүгүрткөн, жоопкерчиликтүү жана жүйрүктүү инсандар калыптанат</p>
+                </div>
+                
+                <div class="result-card fade-in" style="animation-delay: 0.2s">
+                    <div class="result-number">03</div>
+                    <h3>Кызыгуу артат</h3>
+                    <p>Окуучулардын сабакка болгон кызыгуусу жана активдүүлүгү олуттуу артат</p>
+                </div>
+                
+                <div class="result-card fade-in" style="animation-delay: 0.3s">
+                    <div class="result-number">04</div>
+                    <h3>Атаандаштыкка жөндөмдүү жаштар</h3>
+                    <p>Коомго пайдалуу, атаандаштыкка жөндөмдүү жана ийгиликтүү жаштар тарбияланат</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Сапаттуу билимге кошулуңуз!</h2>
+            <p>
+                Биздин заманбап билим берүү программабыз сиздин балаңыздын келечегин жарык кылат. 
+                Азыр эле катталып, жогорку сапаттагы билимге ээ болуңуз!
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">Катталуу</a>
+                <a href="#" class="btn-secondary">Көбүрөөк билүү</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Байланыш</h4>
+                <p>📧 info@sapattuu-bilim.kg</p>
+                <p>📞 +996 XXX XXX XXX</p>
+                <p>📍 Бишкек, Кыргызстан</p>
+            </div>
+            <div class="footer-section">
+                <h4>Бөлүмдөр</h4>
+                <a href="#programs">Программалар</a>
+                <a href="#teachers">Мугалимдер</a>
+                <a href="#results">Натыйжалар</a>
+            </div>
+            <div class="footer-section">
+                <h4>Маалымат</h4>
+                <a href="#">Биз жөнүндө</a>
+                <a href="#">Байланыш</a>
+                <a href="#">Жардам</a>
+            </div>
+            <div class="footer-section">
+                <h4>Социалдык тармактар</h4>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Сапаттуу билим. Бардык укуктар корголгон.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = scrollPercentage + '%';
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to stats on scroll
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    if (statNumber) {
+                        statNumber.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            statNumber.style.transform = 'scale(1)';
+                        }, 300);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.stat-card').forEach(card => {
+            statsObserver.observe(card);
+        });
+    </script>
+</body>
+</html>

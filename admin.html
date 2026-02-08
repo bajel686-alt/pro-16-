@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Администратордук панель - №16 "Маданият"</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --danger: #dc2626;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Header */
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .admin-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-title h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .admin-title p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-success {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #d97706;
+        }
+
+        /* Main Content */
+        .admin-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .admin-card h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Merriweather', serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        /* News Management */
+        .news-list {
+            margin-top: 1rem;
+        }
+
+        .news-item {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .news-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .news-item-header h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            flex: 1;
+        }
+
+        .news-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .news-item-date {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-item-desc {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+            font-weight: 600;
+            animation: slideDown 0.3s ease;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--shadow-lg);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .admin-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .admin-actions .btn {
+                width: 100%;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-title">
+                <h1>⚙️ Администратордук панель</h1>
+                <p>№16 "Маданият" орто мектеби - Контент башкаруу системасы</p>
+            </div>
+            <div class="admin-actions">
+                <div class="user-info" id="userInfo">👤 Колдонуучу</div>
+                <a href="index.html" class="btn btn-white">🏠 Башкы бетке</a>
+                <button class="btn btn-danger" onclick="logout()">🚪 Чыгуу</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <div class="success-message" id="successMessage">
+            ✅ Өзгөртүүлөр ийгиликтүү сакталды!
+        </div>
+
+        <div class="admin-grid">
+            <!-- Statistics Editor -->
+            <div class="admin-card">
+                <h2>📊 Статистиканы өзгөртүү</h2>
+                <form id="statsForm" onsubmit="updateStats(event)">
+                    <div class="stats-grid">
+                        <div class="form-group">
+                            <label for="students">Окуучулар:</label>
+                            <input type="text" id="students" name="students" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teachers">Мугалимдер:</label>
+                            <input type="text" id="teachers" name="teachers" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="classrooms">Кабинеттер:</label>
+                            <input type="text" id="classrooms" name="classrooms" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="clubs">Үгүттөр:</label>
+                            <input type="text" id="clubs" name="clubs" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 100%;">
+                        💾 Сактоо
+                    </button>
+                </form>
+            </div>
+
+            <!-- Add News -->
+            <div class="admin-card">
+                <h2>➕ Жаңы жаңылык кошуу</h2>
+                <form id="addNewsForm" onsubmit="addNews(event)">
+                    <div class="form-group">
+                        <label for="newsIcon">Иконка (emoji):</label>
+                        <input type="text" id="newsIcon" name="newsIcon" placeholder="📰" maxlength="2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsDate">Дата:</label>
+                        <input type="text" id="newsDate" name="newsDate" placeholder="4 Февраль, 2026" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsTitle">Аталышы:</label>
+                        <input type="text" id="newsTitle" name="newsTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newsDescription">Сүрөттөмө:</label>
+                        <textarea id="newsDescription" name="newsDescription" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="width: 100%;">
+                        ➕ Кошуу
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- News List -->
+        <div class="admin-card">
+            <h2>📰 Жаңылыктарды башкаруу</h2>
+            <div class="news-list" id="newsList">
+                <!-- News items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit News Modal -->
+    <div class="modal" id="editNewsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ Жаңылыкты өзгөртүү</h2>
+                <button class="close-btn" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editNewsForm" onsubmit="saveEditedNews(event)">
+                <input type="hidden" id="editNewsId">
+                <div class="form-group">
+                    <label for="editNewsIcon">Иконка (emoji):</label>
+                    <input type="text" id="editNewsIcon" name="editNewsIcon" maxlength="2" required>
+                </div>
+                <div class="form-group">
+                    <label for="editNewsDate">Дата:</label>
+                    <input type="text" id="editNewsDate" name="editNewsDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editNewsTitle">Аталышы:</label>
+                    <input type="text" id="editNewsTitle" name="editNewsTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editNewsDescription">Сүрөттөмө:</label>
+                    <textarea id="editNewsDescription" name="editNewsDescription" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success" style="width: 100%;">
+                    💾 Сактоо
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

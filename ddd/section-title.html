@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Олимпиадные Достижения</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #283593;
+            --accent: #ffd700;
+            --accent-dark: #ffb300;
+            --bg: #f5f7fa;
+            --text: #2c3e50;
+            --text-light: #546e7a;
+            --white: #ffffff;
+            --shadow: rgba(26, 35, 126, 0.15);
+            --success: #2e7d32;
+            --error: #c62828;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .trophy-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px var(--accent));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .admin-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 0.875rem 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .admin-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .achievement-card:nth-child(1) { animation-delay: 0.1s; }
+        .achievement-card:nth-child(2) { animation-delay: 0.2s; }
+        .achievement-card:nth-child(3) { animation-delay: 0.3s; }
+        .achievement-card:nth-child(4) { animation-delay: 0.4s; }
+        .achievement-card:nth-child(5) { animation-delay: 0.5s; }
+        .achievement-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(26, 35, 126, 0.25);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .card-content {
+            padding: 1.75rem;
+        }
+
+        .medal-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gold { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #1a237e; }
+        .silver { background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%); color: #1a237e; }
+        .bronze { background: linear-gradient(135deg, #cd7f32 0%, #e6a65d 100%); color: #fff; }
+        .participant { background: linear-gradient(135deg, #64b5f6 0%, #90caf9 100%); color: #1a237e; }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card-description {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .empty-state h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .image-preview {
+            margin-top: 1rem;
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .image-preview.active {
+            display: block;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: var(--text);
+            margin-top: 0.75rem;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: var(--white);
+            margin-top: 0.75rem;
+        }
+
+        .btn-danger:hover {
+            background: #b71c1c;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .admin-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+        }
+
+        .btn-small {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .admin-table {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        th {
+            padding: 1.25rem;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1.25rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table-image {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: #1976d2;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #1565c0;
+        }
+
+        .btn-delete {
+            background: var(--error);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #b71c1c;
+        }
+
+        .logout-btn {
+            background: var(--text-light);
+            color: var(--white);
+        }
+
+        .logout-btn:hover {
+            background: #455a64;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .achievements-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .table-responsive {
+                overflow-x: auto;
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="trophy-icon">🏆</div>
+                    <div>
+                        <h1>Олимпиадные Достижения</h1>
+                        <div class="subtitle">Наши победы и успехи</div>
+                    </div>
+                </div>
+                <button class="admin-btn" onclick="openLoginModal()">
+                    🔐 Панель администратора
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (Public View) -->
+    <div class="main-content" id="publicView">
+        <div class="container">
+            <div id="achievementsContainer" class="achievements-grid"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="container">
+            <div class="admin-header">
+                <h2>📊 Управление достижениями</h2>
+                <div>
+                    <button class="btn btn-success btn-small" onclick="openAddModal()">
+                        ➕ Добавить достижение
+                    </button>
+                    <button class="btn logout-btn btn-small" onclick="logout()">
+                        Выйти
+                    </button>
+                </div>
+            </div>
+            <div class="admin-table table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Фото</th>
+                            <th>Название</th>
+                            <th>Ученик</th>
+                            <th>Предмет</th>
+                            <th>Место</th>
+                            <th>Год</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Вход</h2>
+                <p style="color: var(--text-light);">Введите данные администратора</p>
+            </div>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label>Логин</label>
+                    <input type="text" id="loginUsername" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="loginPassword" required placeholder="admin123">
+                </div>
+                <button type="submit" class="btn btn-primary">Войти</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('loginModal')">
+                    Отмена
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Achievement Modal -->
+    <div class="modal" id="achievementModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">➕ Добавить достижение</h2>
+            </div>
+            <form onsubmit="saveAchievement(event)">
+                <input type="hidden" id="achievementId">
+                
+                <div class="form-group">
+                    <label>Название олимпиады *</label>
+                    <input type="text" id="achievementName" required 
+                           placeholder="Всероссийская олимпиада по математике">
+                </div>
+
+                <div class="form-group">
+                    <label>ФИО ученика *</label>
+                    <input type="text" id="studentName" required 
+                           placeholder="Иванов Иван Иванович">
+                </div>
+
+                <div class="form-group">
+                    <label>Предмет *</label>
+                    <input type="text" id="subject" required 
+                           placeholder="Математика">
+                </div>
+
+                <div class="form-group">
+                    <label>Место *</label>
+                    <select id="place" required>
+                        <option value="">Выберите место</option>
+                        <option value="gold">🥇 Золото (1 место)</option>
+                        <option value="silver">🥈 Серебро (2 место)</option>
+                        <option value="bronze">🥉 Бронза (3 место)</option>
+                        <option value="participant">🎖️ Участник</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Год *</label>
+                    <input type="number" id="year" required 
+                           placeholder="2024" min="2000" max="2100">
+                </div>
+
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea id="description" 
+                              placeholder="Дополнительная информация о достижении..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Фотография</label>
+                    <input type="file" id="imageUpload" accept="image/*" 
+                           onchange="previewImage(event)">
+                    <img id="imagePreview" class="image-preview">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('achievementModal')">
+                    Отмена
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Storage keys
+        const STORAGE_KEY = 'olympiad_achievements';
+        const AUTH_KEY = 'olympiad_auth';
+        
+        // Default credentials (в реальном приложении использовать backend)
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'admin123'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadAchievements();
+        });
+
+        // Authentication
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (username === ADMIN_CREDENTIALS.username && 
+                password === ADMIN_CREDENTIALS.password) {
+                sessionStorage.setItem(AUTH_KEY, 'true');
+                closeModal('loginModal');
+                showAdminPanel();
+            } else {
+                alert('❌ Неверный логин или пароль!');
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem(AUTH_KEY);
+            showPublicView();
+        }
+
+        function checkAuth() {
+            if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+                showAdminPanel();
+            }
+        }
+
+        function showAdminPanel() {
+            document.getElementById('publicView').style.display = 'none';
+            document.getElementById('adminPanel').classList.add('active');
+            loadAdminTable();
+        }
+
+        function showPublicView() {
+            document.getElementById('publicView').style.display = 'block';
+            document.getElementById('adminPanel').classList.remove('active');
+            loadAchievements();
+        }
+
+        // Modal controls
+        function openLoginModal() {
+            if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+                showAdminPanel();
+            } else {
+                document.getElementById('loginModal').classList.add('active');
+            }
+        }
+
+        function openAddModal() {
+            document.getElementById('modalTitle').textContent = '➕ Добавить достижение';
+            document.getElementById('achievementId').value = '';
+            document.getElementById('achievementName').value = '';
+            document.getElementById('studentName').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('place').value = '';
+            document.getElementById('year').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('imageUpload').value = '';
+            document.getElementById('imagePreview').classList.remove('active');
+            document.getElementById('achievementModal').classList.add('active');
+        }
+
+        function openEditModal(id) {
+            const achievements = getAchievements();
+            const achievement = achievements.find(a => a.id === id);
+            
+            if (achievement) {
+                document.getElementById('modalTitle').textContent = '✏️ Редактировать достижение';
+                document.getElementById('achievementId').value = achievement.id;
+                document.getElementById('achievementName').value = achievement.name;
+                document.getElementById('studentName').value = achievement.student;
+                document.getElementById('subject').value = achievement.subject;
+                document.getElementById('place').value = achievement.place;
+                document.getElementById('year').value = achievement.year;
+                document.getElementById('description').value = achievement.description || '';
+                
+                if (achievement.image) {
+                    document.getElementById('imagePreview').src = achievement.image;
+                    document.getElementById('imagePreview').classList.add('active');
+                }
+                
+                document.getElementById('achievementModal').classList.add('active');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Image preview
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.classList.add('active');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // CRUD operations
+        function getAchievements() {
+            const data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
+
+        function saveAchievements(achievements) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(achievements));
+        }
+
+        function saveAchievement(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('achievementId').value;
+            const imagePreview = document.getElementById('imagePreview');
+            const imageFile = document.getElementById('imageUpload').files[0];
+            
+            const achievement = {
+                id: id || Date.now().toString(),
+                name: document.getElementById('achievementName').value,
+                student: document.getElementById('studentName').value,
+                subject: document.getElementById('subject').value,
+                place: document.getElementById('place').value,
+                year: document.getElementById('year').value,
+                description: document.getElementById('description').value,
+                image: imagePreview.classList.contains('active') ? imagePreview.src : null
+            };
+
+            const achievements = getAchievements();
+            
+            if (id) {
+                // Update
+                const index = achievements.findIndex(a => a.id === id);
+                if (index !== -1) {
+                    achievements[index] = achievement;
+                }
+            } else {
+                // Create
+                achievements.push(achievement);
+            }
+
+            saveAchievements(achievements);
+            closeModal('achievementModal');
+            loadAdminTable();
+            loadAchievements();
+            
+            alert('✅ Достижение успешно сохранено!');
+        }
+
+        function deleteAchievement(id) {
+            if (confirm('❓ Вы уверены, что хотите удалить это достижение?')) {
+                const achievements = getAchievements();
+                const filtered = achievements.filter(a => a.id !== id);
+                saveAchievements(filtered);
+                loadAdminTable();
+                loadAchievements();
+                alert('✅ Достижение удалено!');
+            }
+        }
+
+        // Display functions
+        function loadAchievements() {
+            const container = document.getElementById('achievementsContainer');
+            const achievements = getAchievements();
+
+            if (achievements.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🏆</div>
+                        <h2>Пока нет достижений</h2>
+                        <p style="color: var(--text-light); margin-top: 0.5rem;">
+                            Достижения появятся здесь после добавления администратором
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = achievements.map(achievement => `
+                <div class="achievement-card">
+                    ${achievement.image ? 
+                        `<img src="${achievement.image}" alt="${achievement.name}" class="card-image">` :
+                        `<div class="card-image"></div>`
+                    }
+                    <div class="card-content">
+                        <span class="medal-badge ${achievement.place}">
+                            ${getMedalText(achievement.place)}
+                        </span>
+                        <h3 class="card-title">${achievement.name}</h3>
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <span>👤</span>
+                                <span>${achievement.student}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📚</span>
+                                <span>${achievement.subject}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📅</span>
+                                <span>${achievement.year}</span>
+                            </div>
+                        </div>
+                        ${achievement.description ? 
+                            `<p class="card-description">${achievement.description}</p>` : ''
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadAdminTable() {
+            const tbody = document.getElementById('adminTableBody');
+            const achievements = getAchievements();
+
+            if (achievements.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 3rem; color: var(--text-light);">
+                            Нет данных для отображения
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = achievements.map(achievement => `
+                <tr>
+                    <td>
+                        ${achievement.image ? 
+                            `<img src="${achievement.image}" class="table-image">` :
+                            `<div style="width: 80px; height: 60px; background: #e0e0e0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">📷</div>`
+                        }
+                    </td>
+                    <td><strong>${achievement.name}</strong></td>
+                    <td>${achievement.student}</td>
+                    <td>${achievement.subject}</td>
+                    <td><span class="medal-badge ${achievement.place}">${getMedalText(achievement.place)}</span></td>
+                    <td>${achievement.year}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-icon btn-edit" onclick="openEditModal('${achievement.id}')">
+                                ✏️ Изменить
+                            </button>
+                            <button class="btn-icon btn-delete" onclick="deleteAchievement('${achievement.id}')">
+                                🗑️ Удалить
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getMedalText(place) {
+            const medals = {
+                'gold': '🥇 Золото',
+                'silver': '🥈 Серебро',
+                'bronze': '🥉 Бронза',
+                'participant': '🎖️ Участник'
+            };
+            return medals[place] || place;
+        }
+
+        // Close modal on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

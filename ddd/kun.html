@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Электрондук журнал - Окуу жетишкендиктери (1-11 класс)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f3460;
+            --primary-light: #16213e;
+            --primary-dark: #0a1f3d;
+            --accent: #e94560;
+            --accent-light: #ff6584;
+            --secondary: #533483;
+            --success: #06a77d;
+            --warning: #f9a826;
+            --danger: #e63946;
+            --bg-main: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6c757d;
+            --border: #dee2e6;
+            --shadow: rgba(15, 52, 96, 0.1);
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Login Screen */
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-screen::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(233, 69, 96, 0.15) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(5deg); }
+            66% { transform: translate(-20px, 20px) rotate(-5deg); }
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 4rem 3.5rem;
+            width: 90%;
+            max-width: 480px;
+            box-shadow: 
+                0 50px 100px rgba(0, 0, 0, 0.25),
+                0 20px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-header h1 {
+            font-family: 'Spectral', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: 'IBM Plex Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg-main);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 1.5rem;
+            font-family: 'IBM Plex Sans', sans-serif;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(-1px);
+        }
+
+        .login-help {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            border-left: 4px solid var(--accent);
+        }
+
+        .login-help strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .login-help div {
+            margin: 0.4rem 0;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2.5rem;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px rgba(15, 52, 96, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-info h2 {
+            font-family: 'Spectral', serif;
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+        }
+
+        .header-info p {
+            opacity: 0.9;
+            font-size: 1.05rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-logout {
+            padding: 0.9rem 1.75rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.2s; }
+        .stat-card:nth-child(2) { animation-delay: 0.3s; }
+        .stat-card:nth-child(3) { animation-delay: 0.4s; }
+        .stat-card:nth-child(4) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(15, 52, 96, 0.15);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon.students { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .stat-icon.classes { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-icon.subjects { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-icon.avg { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+        .stat-content h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Spectral', serif;
+            line-height: 1;
+        }
+
+        .stat-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px var(--shadow);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab:hover:not(.active) {
+            color: var(--text-primary);
+            background: var(--bg-main);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .content-header h3 {
+            font-family: 'Spectral', serif;
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .content-header p {
+            color: var(--text-secondary);
+        }
+
+        .filters-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-main);
+            border-radius: 16px;
+        }
+
+        .form-select {
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: white;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(15, 52, 96, 0.08);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+
+        th {
+            padding: 1.25rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 1.25rem 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--bg-main);
+        }
+
+        .grade-input {
+            width: 70px;
+            padding: 0.6rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .grade-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
+            transform: scale(1.05);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 0.9rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .grade-5 { background: linear-gradient(135deg, #06a77d 0%, #38b2ac 100%); color: white; }
+        .grade-4 { background: linear-gradient(135deg, #4299e1 0%, #667eea 100%); color: white; }
+        .grade-3 { background: linear-gradient(135deg, #f9a826 0%, #f6e05e 100%); color: #744210; }
+        .grade-2 { background: linear-gradient(135deg, #e63946 0%, #fc8181 100%); color: white; }
+
+        .attendance-toggle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .attendance-toggle.present { 
+            background: linear-gradient(135deg, var(--success) 0%, #38b2ac 100%);
+            box-shadow: 0 4px 12px rgba(6, 167, 125, 0.3);
+        }
+
+        .attendance-toggle.absent { 
+            background: linear-gradient(135deg, var(--danger) 0%, #fc8181 100%);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+        }
+
+        .attendance-toggle:hover {
+            transform: scale(1.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .attendance-toggle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.3);
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, var(--danger) 0%, #fc8181 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .success-alert {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            padding: 1.25rem 1.5rem;
+            border-radius: 14px;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--success);
+            animation: slideInRight 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .award-card {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe4b5 100%);
+            border: 2px solid #f9a826;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 20px rgba(249, 168, 38, 0.2);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+
+        .award-info h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .award-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .period-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .report-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-item {
+            background: var(--bg-main);
+            padding: 1.5rem;
+            border-radius: 14px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .summary-item h4 {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .summary-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Spectral', serif;
+        }
+
+        .user-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-info h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .role-teacher {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .role-parent {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        @media (max-width: 968px) {
+            .dashboard {
+                padding: 1.5rem;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table-container {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.875rem 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-logo">📚</div>
+                    <h1>Электрондук журнал</h1>
+                    <p>Окуу жетишкендиктери (1–11 класс)</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Логин</label>
+                        <input type="text" id="username" class="form-input" placeholder="Логиниңизди киргизиңиз" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" class="form-input" placeholder="Паролуңузду киргизиңиз" required>
+                    </div>
+                    <button type="submit" class="btn-login">Системага кирүү</button>
+                </form>
+                <div class="login-help">
+                    <strong>Тестирлөө үчүн киргизүү маалыматтары:</strong>
+                    <div><strong>Директор:</strong> admin / admin123</div>
+                    <p style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #dee2e6; font-size: 0.85em; color: #6c757d;">
+                        ℹ️ Мугалимдер жана ата-энелердин аккаунттары директор тарабынан "Колдонуучулар" бөлүмүндө түзүлөт
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="dashboard hidden">
+            <div class="dashboard-header">
+                <div class="header-info">
+                    <h2 id="welcomeText">Кош келиңиз</h2>
+                    <p id="roleText">Колдонуучу</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-logout" onclick="logout()">Чыгуу</button>
+                </div>
+            </div>
+
+            <!-- Stats Cards (Admin/Teacher) -->
+            <div id="statsCards" class="dashboard-stats hidden">
+                <!-- Will be populated by JS -->
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="tabs" id="mainTabs">
+                    <!-- Will be populated by JS -->
+                </div>
+
+                <div id="tabsContent">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced database with full school structure
+        const DATABASE = {
+            users: {
+                'admin': { 
+                    password: 'admin123', 
+                    role: 'admin', 
+                    name: 'Директор Таникулов Тыныбек',
+                    email: 'director@school.kg'
+                }
+            },
+
+            classes: ['1-А', '1-Б', '2-А', '2-Б', '3-А', '3-Б', '4-А', '4-Б', '5-А', '5-Б', '6-А', '6-Б', '7-А', '7-Б', '8-А', '8-Б', '9-А', '9-Б', '10-А', '10-Б', '11-А', '11-Б'],
+
+            subjects: [
+                'Математика', 
+                'Кыргыз тили', 
+                'Орус тили', 
+                'Англис тили',
+                'Физика',
+                'Химия',
+                'Биология',
+                'География',
+                'Тарых',
+                'Информатика',
+                'Дене тарбия',
+                'Адабият'
+            ],
+
+            students: [
+                { id: 1, name: 'Алиев Бекжан Маратович', class: '5-А', gender: 'М' },
+                { id: 2, name: 'Исакова Айгерим Бекболотовна', class: '5-А', gender: 'Ж' },
+                { id: 3, name: 'Усупов Нурбек Азаматович', class: '5-А', gender: 'М' },
+                { id: 4, name: 'Жумабаева Гулжан Эсенбековна', class: '5-А', gender: 'Ж' },
+                { id: 5, name: 'Мамедов Санжар Русланович', class: '5-А', gender: 'М' },
+                { id: 6, name: 'Токтосунова Айдана Нурлановна', class: '5-Б', gender: 'Ж' },
+                { id: 7, name: 'Исакова Айнура Маратовна', class: '7-Б', gender: 'Ж' },
+                { id: 8, name: 'Касымов Эрлан Бакытович', class: '6-А', gender: 'М' },
+                { id: 9, name: 'Сулайманова Нурай Алмазбековна', class: '6-А', gender: 'Ж' },
+                { id: 10, name: 'Абдыкадыров Темир Асанович', class: '7-А', gender: 'М' }
+            ],
+
+            grades: {
+                1: {
+                    'Математика': [5, 4, 5, 5, 4, 5, 5],
+                    'Кыргыз тили': [4, 4, 5, 4, 5, 4, 4],
+                    'Орус тили': [5, 5, 4, 5, 5, 5, 5],
+                    'Англис тили': [4, 4, 4, 5, 4, 4, 5]
+                },
+                2: {
+                    'Математика': [5, 5, 5, 5, 5, 5, 5],
+                    'Кыргыз тили': [5, 5, 5, 5, 5, 5, 5],
+                    'Орус тили': [5, 5, 5, 5, 4, 5, 5],
+                    'Англис тили': [5, 5, 5, 5, 5, 5, 5]
+                },
+                3: {
+                    'Математика': [3, 4, 3, 4, 4, 3, 4],
+                    'Кыргыз тили': [4, 3, 4, 3, 4, 4, 3],
+                    'Орус тили': [4, 4, 4, 3, 4, 4, 4],
+                    'Англис тили': [3, 3, 4, 3, 3, 4, 3]
+                }
+            },
+
+            attendance: {
+                1: { '2025-02-01': true, '2025-02-02': true, '2025-02-03': false, '2025-02-04': true },
+                2: { '2025-02-01': true, '2025-02-02': true, '2025-02-03': true, '2025-02-04': true },
+                3: { '2025-02-01': true, '2025-02-02': false, '2025-02-03': false, '2025-02-04': true }
+            }
+        };
+
+        // Load saved data from localStorage
+        function loadSavedData() {
+            const savedUsers = localStorage.getItem('schoolJournalUsers');
+            if (savedUsers) {
+                try {
+                    const parsedUsers = JSON.parse(savedUsers);
+                    // Merge saved users with default DATABASE
+                    Object.assign(DATABASE.users, parsedUsers);
+                } catch (e) {
+                    console.error('Error loading saved users:', e);
+                }
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            try {
+                localStorage.setItem('schoolJournalUsers', JSON.stringify(DATABASE.users));
+            } catch (e) {
+                console.error('Error saving data:', e);
+            }
+        }
+
+        // Load saved data on page load
+        loadSavedData();
+
+        let currentUser = null;
+
+        // Login handler
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Get fresh user data from DATABASE
+            const user = DATABASE.users[username];
+            
+            if (user && user.password === password) {
+                currentUser = { username, ...user };
+                showDashboard();
+            } else {
+                alert('❌ Логин же пароль туура эмес!\nСураныч, кайра аракет кылыңыз.');
+            }
+        });
+
+        function showDashboard() {
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            document.getElementById('welcomeText').textContent = `Кош келиңиз, ${currentUser.name}`;
+            
+            const roleTexts = {
+                'admin': 'Директор / Администратор',
+                'teacher': `Мугалим - ${currentUser.subject}`,
+                'parent': 'Ата-эне'
+            };
+            document.getElementById('roleText').textContent = roleTexts[currentUser.role];
+
+            if (currentUser.role === 'admin') {
+                renderAdminDashboard();
+            } else if (currentUser.role === 'teacher') {
+                renderTeacherDashboard();
+            } else if (currentUser.role === 'parent') {
+                renderParentDashboard();
+            }
+        }
+
+        function renderAdminDashboard() {
+            // Stats cards
+            const teacherCount = Object.values(DATABASE.users).filter(u => u.role === 'teacher').length;
+            const parentCount = Object.values(DATABASE.users).filter(u => u.role === 'parent').length;
+
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon students">👨‍🎓</div>
+                        <div class="stat-content">
+                            <h3>${DATABASE.students.length}</h3>
+                            <p>Окуучулар</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon classes">👨‍🏫</div>
+                        <div class="stat-content">
+                            <h3>${teacherCount}</h3>
+                            <p>Мугалимдер</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon subjects">👪</div>
+                        <div class="stat-content">
+                            <h3>${parentCount}</h3>
+                            <p>Ата-энелер</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon avg">⭐</div>
+                        <div class="stat-content">
+                            <h3>${calculateOverallAverage().toFixed(1)}</h3>
+                            <p>Орточо баа</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('statsCards').innerHTML = statsHTML;
+            document.getElementById('statsCards').classList.remove('hidden');
+
+            // Tabs
+            const tabsHTML = `
+                <button class="tab active" onclick="switchTab('users')">👥 Колдонуучулар</button>
+                <button class="tab" onclick="switchTab('allGrades')">📊 Бардык баалар</button>
+                <button class="tab" onclick="switchTab('reports')">📈 7 айлык жыйынтык</button>
+                <button class="tab" onclick="switchTab('students')">👨‍🎓 Окуучулар</button>
+                <button class="tab" onclick="switchTab('awards')">🏆 Грамоталар</button>
+                <button class="tab" onclick="switchTab('settings')">⚙️ Тууралоолор</button>
+            `;
+            document.getElementById('mainTabs').innerHTML = tabsHTML;
+
+            const contentHTML = `
+                <div id="usersTab" class="tab-content active">${renderUsersManagement()}</div>
+                <div id="allGradesTab" class="tab-content">${renderAllGradesView()}</div>
+                <div id="reportsTab" class="tab-content">${renderSevenMonthReport()}</div>
+                <div id="studentsTab" class="tab-content">${renderStudentsManagement()}</div>
+                <div id="awardsTab" class="tab-content">${renderAwardsView()}</div>
+                <div id="settingsTab" class="tab-content">${renderAdminSettings()}</div>
+            `;
+            document.getElementById('tabsContent').innerHTML = contentHTML;
+        }
+
+        function renderUsersManagement() {
+            const teachers = Object.entries(DATABASE.users).filter(([_, user]) => user.role === 'teacher');
+            const parents = Object.entries(DATABASE.users).filter(([_, user]) => user.role === 'parent');
+
+            return `
+                <div class="content-header">
+                    <h3>Колдонуучуларды башкаруу</h3>
+                    <p>Мугалимдер жана ата-энелерди кошуу</p>
+                </div>
+
+                <!-- Add Teacher Section -->
+                <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">➕ Мугалим кошуу</h4>
+                    <div class="filters-row">
+                        <input type="text" class="form-input" id="teacherName" placeholder="Аты-жөнү (мис: Кадырова Бегимай)">
+                        <input type="text" class="form-input" id="teacherLogin" placeholder="Логин (мис: math_teacher)">
+                        <input type="password" class="form-input" id="teacherPassword" placeholder="Пароль">
+                        <select class="form-select" id="teacherSubject">
+                            <option value="">Предметти тандаңыз</option>
+                            ${DATABASE.subjects.map(s => `<option value="${s}">${s}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Класстар (бир нечени тандоого болот):</label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem;">
+                            ${DATABASE.classes.map(c => `
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" class="teacher-class-checkbox" value="${c}">
+                                    <span>${c}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 1.5rem;" onclick="addTeacher()">👨‍🏫 Мугалимди кошуу</button>
+                </div>
+
+                <!-- Add Parent Section -->
+                <div style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">➕ Ата-эне кошуу</h4>
+                    <div class="filters-row">
+                        <input type="text" class="form-input" id="parentName" placeholder="Аты-жөнү (мис: Алиева Гулнара)">
+                        <input type="text" class="form-input" id="parentLogin" placeholder="Логин (мис: parent1)">
+                        <input type="password" class="form-input" id="parentPassword" placeholder="Пароль">
+                        <select class="form-select" id="parentStudent">
+                            <option value="">Окуучуну тандаңыз</option>
+                            ${DATABASE.students.map(s => `<option value="${s.id}">${s.name} (${s.class})</option>`).join('')}
+                        </select>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 1.5rem;" onclick="addParent()">👪 Ата-энени кошуу</button>
+                </div>
+
+                <div id="userSuccess" class="success-alert hidden">
+                    ✓ Колдонуучу ийгиликтүү кошулду!
+                </div>
+
+                <!-- Teachers List -->
+                <div style="margin-bottom: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">👨‍🏫 Мугалимдер (${teachers.length})</h4>
+                    ${teachers.length > 0 ? teachers.map(([username, user]) => `
+                        <div class="user-card">
+                            <div class="user-header">
+                                <div class="user-info">
+                                    <h4>${user.name}</h4>
+                                    <p>📚 ${user.subject} • 🔑 ${username} • 📖 ${user.classes.join(', ')}</p>
+                                </div>
+                                <div>
+                                    <span class="role-badge role-teacher">Мугалим</span>
+                                    <button class="btn-danger" onclick="deleteUser('${username}')" style="margin-left: 0.5rem;">🗑️ Өчүрүү</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('') : '<p style="color: var(--text-secondary); padding: 1rem;">Мугалимдер катталган эмес</p>'}
+                </div>
+
+                <!-- Parents List -->
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">👪 Ата-энелер (${parents.length})</h4>
+                    ${parents.length > 0 ? parents.map(([username, user]) => {
+                        const student = DATABASE.students.find(s => s.id === user.studentId);
+                        return `
+                            <div class="user-card">
+                                <div class="user-header">
+                                    <div class="user-info">
+                                        <h4>${user.name}</h4>
+                                        <p>👨‍👩‍👧 ${student ? `${student.name} (${student.class})` : 'Окуучу табылган жок'} • 🔑 ${username}</p>
+                                    </div>
+                                    <div>
+                                        <span class="role-badge role-parent">Ата-эне</span>
+                                        <button class="btn-danger" onclick="deleteUser('${username}')" style="margin-left: 0.5rem;">🗑️ Өчүрүү</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('') : '<p style="color: var(--text-secondary); padding: 1rem;">Ата-энелер катталган эмес</p>'}
+                </div>
+            `;
+        }
+
+        function addTeacher() {
+            const name = document.getElementById('teacherName').value.trim();
+            const login = document.getElementById('teacherLogin').value.trim();
+            const password = document.getElementById('teacherPassword').value;
+            const subject = document.getElementById('teacherSubject').value;
+            
+            const selectedClasses = Array.from(document.querySelectorAll('.teacher-class-checkbox:checked')).map(cb => cb.value);
+
+            if (!name || !login || !password || !subject || selectedClasses.length === 0) {
+                alert('❌ Бардык талааларды толтуруңуз жана жок дегенде бир класс тандаңыз!');
+                return;
+            }
+
+            if (DATABASE.users[login]) {
+                alert('❌ Бул логин колдонулуп жатат! Башка логин тандаңыз.');
+                return;
+            }
+
+            DATABASE.users[login] = {
+                password: password,
+                role: 'teacher',
+                name: name,
+                subject: subject,
+                classes: selectedClasses
+            };
+
+            // Save to localStorage
+            saveData();
+
+            showSuccessMessage('userSuccess');
+            renderAdminDashboard();
+            switchTab('users');
+        }
+
+        function addParent() {
+            const name = document.getElementById('parentName').value.trim();
+            const login = document.getElementById('parentLogin').value.trim();
+            const password = document.getElementById('parentPassword').value;
+            const studentId = parseInt(document.getElementById('parentStudent').value);
+
+            if (!name || !login || !password || !studentId) {
+                alert('❌ Бардык талааларды толтуруңуз!');
+                return;
+            }
+
+            if (DATABASE.users[login]) {
+                alert('❌ Бул логин колдонулуп жатат! Башка логин тандаңыз.');
+                return;
+            }
+
+            DATABASE.users[login] = {
+                password: password,
+                role: 'parent',
+                name: name,
+                studentId: studentId
+            };
+
+            // Save to localStorage
+            saveData();
+
+            showSuccessMessage('userSuccess');
+            renderAdminDashboard();
+            switchTab('users');
+        }
+
+        function deleteUser(username) {
+            if (username === 'admin') {
+                alert('❌ Директорду өчүрүүгө болбойт!');
+                return;
+            }
+
+            if (confirm(`"${DATABASE.users[username].name}" колдонуучусун өчүрүүнү каалайсызбы?`)) {
+                delete DATABASE.users[username];
+                
+                // Save to localStorage
+                saveData();
+                
+                showSuccessMessage('userSuccess');
+                renderAdminDashboard();
+                switchTab('users');
+            }
+        }
+
+        function showSuccessMessage(elementId) {
+            const successMsg = document.getElementById(elementId);
+            if (successMsg) {
+                successMsg.classList.remove('hidden');
+                setTimeout(() => successMsg.classList.add('hidden'), 3000);
+            }
+        }
+
+        function renderTeacherDashboard() {
+            const myStudents = DATABASE.students.filter(s => currentUser.classes.includes(s.class));
+
+            const statsHTML = `
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon students">👨‍🎓</div>
+                        <div class="stat-content">
+                            <h3>${myStudents.length}</h3>
+                            <p>Менин окуучуларым</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon classes">📖</div>
+                        <div class="stat-content">
+                            <h3>${currentUser.classes.length}</h3>
+                            <p>Менин класстарым</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon avg">⭐</div>
+                        <div class="stat-content">
+                            <h3>${calculateTeacherAverage().toFixed(1)}</h3>
+                            <p>Орточо баа</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('statsCards').innerHTML = statsHTML;
+            document.getElementById('statsCards').classList.remove('hidden');
+
+            const tabsHTML = `
+                <button class="tab active" onclick="switchTab('myGrades')">📝 Баа коюу</button>
+                <button class="tab" onclick="switchTab('attendance')">✓ Катышуу</button>
+                <button class="tab" onclick="switchTab('myReports')">📊 Жыйынтык</button>
+            `;
+            document.getElementById('mainTabs').innerHTML = tabsHTML;
+
+            const contentHTML = `
+                <div id="myGradesTab" class="tab-content active">${renderTeacherGradeEntry()}</div>
+                <div id="attendanceTab" class="tab-content">${renderAttendanceView()}</div>
+                <div id="myReportsTab" class="tab-content">${renderTeacherReport()}</div>
+            `;
+            document.getElementById('tabsContent').innerHTML = contentHTML;
+        }
+
+        function renderParentDashboard() {
+            document.getElementById('statsCards').classList.add('hidden');
+            document.getElementById('mainTabs').style.display = 'none';
+
+            const student = DATABASE.students.find(s => s.id === currentUser.studentId);
+            if (!student) {
+                document.getElementById('tabsContent').innerHTML = '<p>Окуучу табылган жок</p>';
+                return;
+            }
+
+            const studentGrades = DATABASE.grades[student.id] || {};
+            const subjects = Object.keys(studentGrades);
+
+            let totalGrade = 0;
+            let totalCount = 0;
+
+            subjects.forEach(subject => {
+                const grades = studentGrades[subject] || [];
+                totalGrade += grades.reduce((a, b) => a + b, 0);
+                totalCount += grades.length;
+            });
+
+            const overallAvg = totalCount > 0 ? (totalGrade / totalCount).toFixed(1) : '0.0';
+
+            const contentHTML = `
+                <div class="content-header">
+                    <h3>Окуучунун жетишкендиктери</h3>
+                    <p>${student.name} - ${student.class} класс</p>
+                </div>
+
+                <div class="period-badge">📅 7 айлык жыйынтык (Сентябрь - Март)</div>
+
+                <div class="report-summary">
+                    <div class="summary-item">
+                        <h4>Орточо баа</h4>
+                        <div class="value">${overallAvg}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Предметтер</h4>
+                        <div class="value">${subjects.length}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Баалар саны</h4>
+                        <div class="value">${totalCount}</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Предмет</th>
+                                <th>Сент</th>
+                                <th>Окт</th>
+                                <th>Нояб</th>
+                                <th>Дек</th>
+                                <th>Янв</th>
+                                <th>Фев</th>
+                                <th>Март</th>
+                                <th>Орточо</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${subjects.map(subject => {
+                                const grades = studentGrades[subject];
+                                const avg = (grades.reduce((a, b) => a + b, 0) / grades.length).toFixed(1);
+                                const gradeClass = Math.floor(parseFloat(avg));
+                                return `
+                                    <tr>
+                                        <td><strong>${subject}</strong></td>
+                                        ${grades.map(g => `<td><span class="grade-badge grade-${g}">${g}</span></td>`).join('')}
+                                        <td><span class="grade-badge grade-${gradeClass}">${avg}</span></td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            document.getElementById('tabsContent').innerHTML = contentHTML;
+        }
+
+        function renderAllGradesView() {
+            return `
+                <div class="content-header">
+                    <h3>Бардык окуучулардын баалары</h3>
+                    <p>7 айлык окуу жыйынтыктары</p>
+                </div>
+
+                <div class="filters-row">
+                    <select class="form-select" id="filterClass" onchange="filterGrades()">
+                        <option value="">Бардык класстар</option>
+                        ${DATABASE.classes.map(c => `<option value="${c}">${c} класс</option>`).join('')}
+                    </select>
+                </div>
+
+                <div id="gradesDisplay">
+                    ${renderGradesTable()}
+                </div>
+            `;
+        }
+
+        function renderGradesTable() {
+            const students = DATABASE.students;
+            
+            return `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Окуучу</th>
+                                <th>Класс</th>
+                                <th>Предметтер саны</th>
+                                <th>Орточо баа</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${students.map((student, idx) => {
+                                const grades = DATABASE.grades[student.id] || {};
+                                const subjects = Object.keys(grades);
+                                let totalGrades = 0;
+                                let count = 0;
+                                
+                                subjects.forEach(subject => {
+                                    const subjectGrades = grades[subject] || [];
+                                    totalGrades += subjectGrades.reduce((a, b) => a + b, 0);
+                                    count += subjectGrades.length;
+                                });
+                                
+                                const avg = count > 0 ? (totalGrades / count).toFixed(1) : '0.0';
+                                const gradeClass = Math.floor(parseFloat(avg));
+                                const status = parseFloat(avg) >= 4.5 ? '🏆 Мыкты' : parseFloat(avg) >= 4.0 ? '⭐ Жакшы' : '📚 Орточо';
+                                
+                                return `
+                                    <tr>
+                                        <td>${idx + 1}</td>
+                                        <td><strong>${student.name}</strong></td>
+                                        <td>${student.class}</td>
+                                        <td>${subjects.length}</td>
+                                        <td><span class="grade-badge grade-${gradeClass}">${avg}</span></td>
+                                        <td>${status}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderSevenMonthReport() {
+            return `
+                <div class="content-header">
+                    <h3>7 айлык окуу жыйынтыгы</h3>
+                    <p>Сентябрь 2024 - Март 2025</p>
+                </div>
+
+                <div class="period-badge">📅 Отчеттук мезгил: 7 ай</div>
+
+                <div class="report-summary">
+                    <div class="summary-item">
+                        <h4>Жалпы орточо</h4>
+                        <div class="value">${calculateOverallAverage().toFixed(1)}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Окуучулар</h4>
+                        <div class="value">${DATABASE.students.length}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Класстар</h4>
+                        <div class="value">${DATABASE.classes.length}</div>
+                    </div>
+                </div>
+
+                ${renderClassReports()}
+            `;
+        }
+
+        function renderClassReports() {
+            const classStats = {};
+            
+            DATABASE.students.forEach(student => {
+                if (!classStats[student.class]) {
+                    classStats[student.class] = {
+                        students: 0,
+                        totalGrade: 0,
+                        count: 0
+                    };
+                }
+                
+                classStats[student.class].students++;
+                
+                const grades = DATABASE.grades[student.id] || {};
+                Object.values(grades).forEach(subjectGrades => {
+                    classStats[student.class].totalGrade += subjectGrades.reduce((a, b) => a + b, 0);
+                    classStats[student.class].count += subjectGrades.length;
+                });
+            });
+
+            return `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Класс</th>
+                                <th>Окуучулар саны</th>
+                                <th>Орточо баа</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Object.entries(classStats).map(([className, stats]) => {
+                                const avg = stats.count > 0 ? (stats.totalGrade / stats.count).toFixed(1) : '0.0';
+                                const gradeClass = Math.floor(parseFloat(avg));
+                                const status = parseFloat(avg) >= 4.5 ? '🏆 Мыкты' : parseFloat(avg) >= 4.0 ? '⭐ Жакшы' : '📚 Орточо';
+                                
+                                return `
+                                    <tr>
+                                        <td><strong>${className}</strong></td>
+                                        <td>${stats.students}</td>
+                                        <td><span class="grade-badge grade-${gradeClass}">${avg}</span></td>
+                                        <td>${status}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderAwardsView() {
+            const excellentStudents = [];
+            
+            DATABASE.students.forEach(student => {
+                const grades = DATABASE.grades[student.id] || {};
+                const subjects = Object.keys(grades);
+                
+                if (subjects.length === 0) return;
+                
+                let totalGrades = 0;
+                let count = 0;
+                
+                subjects.forEach(subject => {
+                    const subjectGrades = grades[subject] || [];
+                    totalGrades += subjectGrades.reduce((a, b) => a + b, 0);
+                    count += subjectGrades.length;
+                });
+                
+                const avg = count > 0 ? (totalGrades / count) : 0;
+                
+                if (avg >= 4.5) {
+                    excellentStudents.push({
+                        ...student,
+                        average: avg.toFixed(1),
+                        type: avg >= 4.9 ? 'gold' : avg >= 4.7 ? 'silver' : 'bronze'
+                    });
+                }
+            });
+
+            excellentStudents.sort((a, b) => parseFloat(b.average) - parseFloat(a.average));
+
+            const awardIcons = {
+                'gold': '🥇',
+                'silver': '🥈',
+                'bronze': '🥉'
+            };
+
+            const awardLabels = {
+                'gold': 'Алтын грамота',
+                'silver': 'Күмүш грамота',
+                'bronze': 'Коло грамота'
+            };
+
+            return `
+                <div class="content-header">
+                    <h3>Грамоталар жана сыйлыктар</h3>
+                    <p>7 айлык жыйынтык боюнча эң мыкты окуучулар</p>
+                </div>
+
+                <div class="period-badge">🏆 Жыйынтык: ${excellentStudents.length} окуучу сунушталат</div>
+
+                ${excellentStudents.length > 0 ? excellentStudents.map((student, idx) => `
+                    <div class="award-card">
+                        <div class="award-icon">${awardIcons[student.type]}</div>
+                        <div class="award-info">
+                            <h4>${idx + 1}. ${student.name}</h4>
+                            <p>${student.class} класс • Орточо баа: <strong>${student.average}</strong> • ${awardLabels[student.type]}</p>
+                        </div>
+                    </div>
+                `).join('') : '<p>Учурда сунуш кылынган окуучу жок</p>'}
+            `;
+        }
+
+        function renderStudentsManagement() {
+            return `
+                <div class="content-header">
+                    <h3>Окуучуларды башкаруу</h3>
+                    <p>Окуучуларды кошуу жана маалыматтарды башкаруу</p>
+                </div>
+
+                <div class="filters-row">
+                    <input type="text" class="form-input" placeholder="Окуучунун аты-жөнү" id="newStudentName">
+                    <select class="form-select" id="newStudentClass">
+                        ${DATABASE.classes.map(c => `<option value="${c}">${c}</option>`).join('')}
+                    </select>
+                    <select class="form-select" id="newStudentGender">
+                        <option value="М">бала</option>
+                        <option value="Ж">кыз</option>
+                    </select>
+                    <button class="btn-primary" onclick="addNewStudent()">Окуучуну кошуу</button>
+                </div>
+
+                <div id="studentSuccess" class="success-alert hidden">
+                    ✓ Окуучу ийгиликтүү кошулду!
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Аты-жөнү</th>
+                                <th>Класс</th>
+                                <th>Жынысы</th>
+                                <th>Орточо баа</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${DATABASE.students.map((student, idx) => {
+                                const grades = DATABASE.grades[student.id] || {};
+                                const subjects = Object.keys(grades);
+                                let totalGrades = 0;
+                                let count = 0;
+                                
+                                subjects.forEach(subject => {
+                                    const subjectGrades = grades[subject] || [];
+                                    totalGrades += subjectGrades.reduce((a, b) => a + b, 0);
+                                    count += subjectGrades.length;
+                                });
+                                
+                                const avg = count > 0 ? (totalGrades / count).toFixed(1) : '-';
+                                
+                                return `
+                                    <tr>
+                                        <td>${idx + 1}</td>
+                                        <td><strong>${student.name}</strong></td>
+                                        <td>${student.class}</td>
+                                        <td>${student.gender}</td>
+                                        <td>${avg !== '-' ? `<span class="grade-badge grade-${Math.floor(parseFloat(avg))}">${avg}</span>` : avg}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderAdminSettings() {
+            return `
+                <div class="content-header">
+                    <h3>⚙️ Системалык тууралоолор</h3>
+                    <p>Директордун аккаунтун башкаруу</p>
+                </div>
+
+                <!-- Change Password Section -->
+                <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2rem; border-radius: 16px; margin-bottom: 2rem; border-left: 4px solid var(--warning);">
+                    <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">🔐 Паролду өзгөртүү</h4>
+                    
+                    <div id="passwordChangeSuccess" class="success-alert hidden">
+                        ✓ Пароль ийгиликтүү өзгөртүлдү!
+                    </div>
+
+                    <div id="passwordChangeError" class="hidden" style="background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%); color: #721c24; padding: 1.25rem 1.5rem; border-radius: 14px; margin-bottom: 1.5rem; border-left: 5px solid var(--danger); font-weight: 500;">
+                        ❌ <span id="passwordErrorText"></span>
+                    </div>
+
+                    <div class="filters-row">
+                        <input type="password" class="form-input" id="currentPassword" placeholder="Учурдагы пароль">
+                        <input type="password" class="form-input" id="newPassword" placeholder="Жаңы пароль">
+                        <input type="password" class="form-input" id="confirmPassword" placeholder="Жаңы паролду тастыктаңыз">
+                    </div>
+                    
+                    <button class="btn-primary" onclick="changeAdminPassword()" style="margin-top: 1rem;">
+                        🔒 Паролду өзгөртүү
+                    </button>
+                </div>
+
+                <!-- Account Info -->
+                <div class="user-card">
+                    <div class="user-header">
+                        <div class="user-info">
+                            <h4>👤 Аккаунт маалыматтары</h4>
+                            <p><strong>Аты-жөнү:</strong> ${currentUser.name}</p>
+                            <p><strong>Логин:</strong> ${currentUser.username}</p>
+                            <p><strong>Электрондук почта:</strong> ${currentUser.email}</p>
+                            <p><strong>Роль:</strong> Директор / Администратор</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Statistics -->
+                <div style="margin-top: 2rem;">
+                    <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">📊 Системанын статистикасы</h4>
+                    <div class="report-summary">
+                        <div class="summary-item">
+                            <h4>Окуучулар</h4>
+                            <div class="value">${DATABASE.students.length}</div>
+                        </div>
+                        <div class="summary-item">
+                            <h4>Мугалимдер</h4>
+                            <div class="value">${Object.values(DATABASE.users).filter(u => u.role === 'teacher').length}</div>
+                        </div>
+                        <div class="summary-item">
+                            <h4>Ата-энелер</h4>
+                            <div class="value">${Object.values(DATABASE.users).filter(u => u.role === 'parent').length}</div>
+                        </div>
+                        <div class="summary-item">
+                            <h4>Класстар</h4>
+                            <div class="value">${DATABASE.classes.length}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTeacherGradeEntry() {
+            return `
+                <div class="content-header">
+                    <h3>Баа коюу - ${currentUser.subject}</h3>
+                    <p>Өз предметиңиз боюнча окуучуларга баа коюңуз</p>
+                </div>
+
+                <div class="filters-row">
+                    <select class="form-select" id="teacherClassSelect" onchange="loadTeacherGrades()">
+                        ${currentUser.classes.map(c => `<option value="${c}">${c} класс</option>`).join('')}
+                    </select>
+                </div>
+
+                <div id="gradeSuccess" class="success-alert hidden">
+                    ✓ Баалар ийгиликтүү сакталды!
+                </div>
+
+                <div id="teacherGradesDisplay">
+                    ${loadTeacherGradesTable()}
+                </div>
+
+                <button class="btn-primary" onclick="saveTeacherGrades()">Бааларды сактоо</button>
+            `;
+        }
+
+        function loadTeacherGradesTable() {
+            const selectedClass = document.getElementById('teacherClassSelect')?.value || currentUser.classes[0];
+            const students = DATABASE.students.filter(s => s.class === selectedClass);
+
+            return `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Окуучу</th>
+                                <th>Учурдагы орточо</th>
+                                <th>Жаңы баа</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${students.map((student, idx) => {
+                                const studentGrades = DATABASE.grades[student.id]?.[currentUser.subject] || [];
+                                const avg = studentGrades.length > 0 ? 
+                                    (studentGrades.reduce((a, b) => a + b, 0) / studentGrades.length).toFixed(1) : '-';
+                                
+                                return `
+                                    <tr>
+                                        <td>${idx + 1}</td>
+                                        <td><strong>${student.name}</strong></td>
+                                        <td>${avg !== '-' ? `<span class="grade-badge grade-${Math.floor(parseFloat(avg))}">${avg}</span>` : avg}</td>
+                                        <td>
+                                            <input type="number" class="grade-input" min="2" max="5" 
+                                                   data-student-id="${student.id}" 
+                                                   placeholder="2-5">
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderAttendanceView() {
+            return `
+                <div class="content-header">
+                    <h3>Катышууну белгилөө</h3>
+                    <p>Сабактарга катышуу</p>
+                </div>
+
+                <div class="filters-row">
+                    <select class="form-select" id="attendanceClassSelect" onchange="loadAttendanceTable()">
+                        ${currentUser.classes.map(c => `<option value="${c}">${c} класс</option>`).join('')}
+                    </select>
+                    <input type="date" class="form-select" id="attendanceDate" value="${new Date().toISOString().split('T')[0]}">
+                </div>
+
+                <div id="attendanceSuccess" class="success-alert hidden">
+                    ✓ Катышуу ийгиликтүү сакталды!
+                </div>
+
+                <div id="attendanceDisplay">
+                    ${loadAttendanceTable()}
+                </div>
+
+                <button class="btn-primary" onclick="saveAttendance()">Катышууну сактоо</button>
+            `;
+        }
+
+        function loadAttendanceTable() {
+            const selectedClass = document.getElementById('attendanceClassSelect')?.value || currentUser.classes[0];
+            const students = DATABASE.students.filter(s => s.class === selectedClass);
+            const selectedDate = document.getElementById('attendanceDate')?.value || new Date().toISOString().split('T')[0];
+
+            return `
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Окуучу</th>
+                                <th>Катышуу</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${students.map((student, idx) => {
+                                const isPresent = DATABASE.attendance[student.id]?.[selectedDate] ?? true;
+                                
+                                return `
+                                    <tr>
+                                        <td>${idx + 1}</td>
+                                        <td><strong>${student.name}</strong></td>
+                                        <td>
+                                            <span class="attendance-toggle ${isPresent ? 'present' : 'absent'}" 
+                                                  onclick="toggleAttendance(${student.id}, '${selectedDate}')"
+                                                  data-student-id="${student.id}"></span>
+                                            ${isPresent ? 'Катышты' : 'Катышкан жок'}
+                                        </td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderTeacherReport() {
+            const myStudents = DATABASE.students.filter(s => currentUser.classes.includes(s.class));
+            
+            let totalGrades = 0;
+            let count = 0;
+            
+            myStudents.forEach(student => {
+                const grades = DATABASE.grades[student.id]?.[currentUser.subject] || [];
+                totalGrades += grades.reduce((a, b) => a + b, 0);
+                count += grades.length;
+            });
+            
+            const avg = count > 0 ? (totalGrades / count).toFixed(1) : '0.0';
+
+            return `
+                <div class="content-header">
+                    <h3>Менин 7 айлык жыйынтыгым</h3>
+                    <p>${currentUser.subject} предмети боюнча</p>
+                </div>
+
+                <div class="period-badge">📅 Сентябрь 2024 - Март 2025</div>
+
+                <div class="report-summary">
+                    <div class="summary-item">
+                        <h4>Окуучулар</h4>
+                        <div class="value">${myStudents.length}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Орточо баа</h4>
+                        <div class="value">${avg}</div>
+                    </div>
+                    <div class="summary-item">
+                        <h4>Баалар саны</h4>
+                        <div class="value">${count}</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Класс</th>
+                                <th>Окуучулар</th>
+                                <th>Орточо баа</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${currentUser.classes.map(className => {
+                                const classStudents = myStudents.filter(s => s.class === className);
+                                let classTotal = 0;
+                                let classCount = 0;
+                                
+                                classStudents.forEach(student => {
+                                    const grades = DATABASE.grades[student.id]?.[currentUser.subject] || [];
+                                    classTotal += grades.reduce((a, b) => a + b, 0);
+                                    classCount += grades.length;
+                                });
+                                
+                                const classAvg = classCount > 0 ? (classTotal / classCount).toFixed(1) : '0.0';
+                                const gradeClass = Math.floor(parseFloat(classAvg));
+                                
+                                return `
+                                    <tr>
+                                        <td><strong>${className}</strong></td>
+                                        <td>${classStudents.length}</td>
+                                        <td><span class="grade-badge grade-${gradeClass}">${classAvg}</span></td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Utility functions
+        function calculateOverallAverage() {
+            let totalGrades = 0;
+            let count = 0;
+            
+            Object.values(DATABASE.grades).forEach(studentGrades => {
+                Object.values(studentGrades).forEach(subjectGrades => {
+                    totalGrades += subjectGrades.reduce((a, b) => a + b, 0);
+                    count += subjectGrades.length;
+                });
+            });
+            
+            return count > 0 ? totalGrades / count : 0;
+        }
+
+        function calculateTeacherAverage() {
+            let totalGrades = 0;
+            let count = 0;
+            
+            DATABASE.students.forEach(student => {
+                if (currentUser.classes.includes(student.class)) {
+                    const grades = DATABASE.grades[student.id]?.[currentUser.subject] || [];
+                    totalGrades += grades.reduce((a, b) => a + b, 0);
+                    count += grades.length;
+                }
+            });
+            
+            return count > 0 ? totalGrades / count : 0;
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        function loadTeacherGrades() {
+            document.getElementById('teacherGradesDisplay').innerHTML = loadTeacherGradesTable();
+        }
+
+        function saveTeacherGrades() {
+            const inputs = document.querySelectorAll('.grade-input');
+            let savedCount = 0;
+            
+            inputs.forEach(input => {
+                const value = parseInt(input.value);
+                if (value >= 2 && value <= 5) {
+                    const studentId = parseInt(input.dataset.studentId);
+                    if (!DATABASE.grades[studentId]) {
+                        DATABASE.grades[studentId] = {};
+                    }
+                    if (!DATABASE.grades[studentId][currentUser.subject]) {
+                        DATABASE.grades[studentId][currentUser.subject] = [];
+                    }
+                    DATABASE.grades[studentId][currentUser.subject].push(value);
+                    savedCount++;
+                }
+            });
+            
+            if (savedCount > 0) {
+                showSuccessMessage('gradeSuccess');
+                loadTeacherGrades();
+            }
+        }
+
+        function toggleAttendance(studentId, date) {
+            if (!DATABASE.attendance[studentId]) {
+                DATABASE.attendance[studentId] = {};
+            }
+            
+            DATABASE.attendance[studentId][date] = !DATABASE.attendance[studentId][date];
+            document.getElementById('attendanceDisplay').innerHTML = loadAttendanceTable();
+        }
+
+        function saveAttendance() {
+            showSuccessMessage('attendanceSuccess');
+        }
+
+        function addNewStudent() {
+            const name = document.getElementById('newStudentName').value.trim();
+            const className = document.getElementById('newStudentClass').value;
+            const gender = document.getElementById('newStudentGender').value;
+            
+            if (name) {
+                const newStudent = {
+                    id: DATABASE.students.length + 1,
+                    name: name,
+                    class: className,
+                    gender: gender
+                };
+                
+                DATABASE.students.push(newStudent);
+                DATABASE.grades[newStudent.id] = {};
+                DATABASE.attendance[newStudent.id] = {};
+                
+                showSuccessMessage('studentSuccess');
+                
+                document.getElementById('newStudentName').value = '';
+                
+                // Refresh the view
+                if (currentUser.role === 'admin') {
+                    renderAdminDashboard();
+                    switchTab('students');
+                }
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function changeAdminPassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Clear previous messages
+            document.getElementById('passwordChangeSuccess').classList.add('hidden');
+            document.getElementById('passwordChangeError').classList.add('hidden');
+
+            // Validation
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showPasswordError('Бардык талааларды толтуруңуз!');
+                return;
+            }
+
+            if (DATABASE.users[currentUser.username].password !== currentPassword) {
+                showPasswordError('Учурдагы пароль туура эмес!');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                showPasswordError('Жаңы пароль жок дегенде 6 символдон турушу керек!');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                showPasswordError('Жаңы паролдор дал келбейт!');
+                return;
+            }
+
+            if (currentPassword === newPassword) {
+                showPasswordError('Жаңы пароль эски паролдон айырмаланышы керек!');
+                return;
+            }
+
+            // Change password
+            DATABASE.users[currentUser.username].password = newPassword;
+            currentUser.password = newPassword;
+
+            // Save to localStorage
+            saveData();
+
+            // Show success message
+            document.getElementById('passwordChangeSuccess').classList.remove('hidden');
+            
+            // Clear inputs
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('passwordChangeSuccess').classList.add('hidden');
+            }, 5000);
+        }
+
+        function showPasswordError(message) {
+            const errorDiv = document.getElementById('passwordChangeError');
+            const errorText = document.getElementById('passwordErrorText');
+            errorText.textContent = message;
+            errorDiv.classList.remove('hidden');
+            
+            setTimeout(() => {
+                errorDiv.classList.add('hidden');
+            }, 5000);
+        }
+
+        localStorage.clear()
+    </script>
+</body>
+</html>

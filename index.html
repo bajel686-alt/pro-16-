@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ky">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>№16 "Маданият" орто мектеби - Расмий сайт</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Merriweather:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="school-logo">
+                <div class="logo-circle">16</div>
+                <div class="school-name">
+                    <h1>№16 Маданият жалпы билим берүү мектеби мекемеси</h1>
+                    <p>Заманбап билим берүү, инновациялуу келечек</p>
+                </div>
+            </div>
+            <button class="login-btn" onclick="openLoginModal()">🔐 Администратор кирүү</button>
+        </div>
+        <nav class="nav-container">
+            <div class="nav">
+                <ul>
+                    <li><a href="#home">🏠 Башкы бет</a></li>
+                    <li><a href="#about">ℹ️ Мектеп жөнүндө</a></li>
+                    <li><a href="#education">📚 Билим берүү</a></li>
+                    <li><a href="#teachers">👨‍🏫 Мугалимдер</a></li>
+                    <li><a href="#students">🎓 Окуучулар</a></li>
+                    <li><a href="#parents">👪 Ата-энелер</a></li>
+                    <li><a href="#news">📰 Жаңылыктар</a></li>
+                    <li><a href="https://wa.me/message/L3TUKZPZR35VJ1">📞 Байланыш</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔐 Кирүү</h2>
+                <button class="close-btn" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="error-message" id="errorMessage">
+                ❌ Колдонуучу аты же пароль туура эмес!
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Колдонуучу аты:</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="submit-btn">Кирүү</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Кош келиңиздер!</h2>
+            <p>№16 "Маданият" орто мектебине - заманбап билим берүү, инновациялык көз караш жана жаркын келечек курууга
+                умтулуу мектеп.</p>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">Мектеп жөнүндө</a>
+                <a href="#news" class="btn btn-secondary">Акыркы жаңылыктар</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="statsSection">
+        <div class="container">
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-item">
+                    <div class="stat-number" data-stat="students">800+</div>
+                    <div class="stat-label">Окуучулар</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-stat="teachers">50+</div>
+                    <div class="stat-label">Мугалимдер</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-stat="classrooms">15+</div>
+                    <div class="stat-label">Кабинеттер</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-stat="clubs">10+</div>
+                    <div class="stat-label">Үгүттөр</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section --> 
+     <section class="section" id="news">
+        <div class="container">
+            <a href="./ddd/section-title.html">
+                <h2>Акыркы жаңылыктар жана окуялар</h2>
+                <p>Мектебибиздин турмушунан соңку жаңылыктар</p>
+            </a>
+             <div class="news-grid" id="newsGrid">
+                <!-- <!- News will be loaded here  -->
+            </div> 
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Биздин артыкчылыктарыбыз</h2>
+                <p>Эмне үчүн "Маданият" мектебин тандоо керек?</p>
+            </div>
+            <div class="features-grid">
+                <a href="./ddd/sap.html" class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Сапаттуу билим</h3>
+                    <p>Заманбап окуу программалары жана жогорку квалификациялуу мугалимдер</p>
+                </a>
+                <a href="./ddd/ino.html" class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Инновациялык мамиле</h3>
+                    <p>STEM билим берүү, санариптик сабаттуулук жана технологиялар</p>
+                </a>
+                <a href="./ddd/on.html" class="feature-card">
+                    <div class="feature-icon">🌟</div>
+                    <h3>Өнүктүрүү</h3>
+                    <p>Ар тараптуу өнүктүрүү үчүн көптөгөн үгүттөр жана секциялар</p>
+                </a>
+                <a href="./ddd/as.html" class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Ачык-айкындуулук</h3>
+                    <p>Ата-энелер менен тыгыз байланыш жана ачык маалымат</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+<section class="section" id="education">
+    <div class="container">
+        <div class="section-title">
+            <h2>Билим берүү процесси</h2>
+            <p>Биздин окутуу программаларыбыз жана ыкмаларыбыз</p>
+        </div>
+
+        <div class="features-grid">
+
+            <a href="./ddd/section-title.html" class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>Окуу программасы</h3>
+                <p>Мамлекеттик стандарттарга ылайык заманбап окуу планы</p>
+            </a>
+
+            <a href="./ddd/fact.html" class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Сабактардын графиги</h3>
+                <p>Оптималдаштырылган убакыт таблицасы жана сабак графиги</p>
+            </a>
+
+            <a href="./ddd/gallery.html" class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Чыгармачылык</h3>
+                <p>Көптөгөн үйрөтүүлөр: музыка, сүрөт, спорт...</p>
+            </a>
+
+            <a href="./ddd/kun.html" class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Электрондук журнал</h3>
+                <p>Кундолук</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Биз менен байланышыңыз</h2>
+                <p>Суроолоруңуз барбы? Биз менен байланышыңыз!</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3><span class="contact-icon">📍</span> Дарек</h3>
+                    <p>Кыргыз Республикасы<br>
+                        Алай району, Чон-Каракол<br>
+                        №16 "Маданият" орто мектеби</p>
+                </div>
+                <div class="contact-card">
+                    <h3><span class="contact-icon">📞</span> Телефон</h3>
+                    <p>Директор: <a href="tel:+996XXX">+996 (501) 11-77-50</a></p>
+                    <p>Кеңсе: <a href="tel:+996XXX">+996 (XXX) XX-XX-XX</a></p>
+                </div>
+                <div class="contact-card">
+                    <h3><span class="contact-icon">📧</span> Электрондук почта</h3>
+                    <p><a href="https://madaniyat83@gmail.com">madaniyat83@gmail.com</a></p>
+                    <!-- <p><a href="mailto:info@madaniyat.kg">info@madaniyat83.kg</a></p> -->
+                </div>
+                <div class="contact-card">
+                    <h3><span class="contact-icon">⏰</span> Иштөө убактысы</h3>
+                    <p>Дүйшөмбү - Жума: 08:00 - 17:00</p>
+                    <p>Ишемби - Жекшемби: Эс алуу күндөрү</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>№16 "Маданият" мектеби</h3>
+                    <p>Заманбап билим берүү, инновациялуу келечек. Биздин миссия - ар бир окуучунун потенциалын ачууга
+                        жардам берүү.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Тез шилтемелер</h3>
+                    <a href="#about">Мектеп жөнүндө</a>
+                    <a href="#education">Билим берүү</a>
+                    <a href="#teachers">Мугалимдер</a>
+                    <a href="#students">Окуучулар</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Маалымат</h3>
+                    <a href="#news">Жаңылыктар</a>
+                    <a href="https://wa.me/message/L3TUKZPZR35VJ1">Байланыш</a>
+                    <a href="#" onclick="openLoginModal(); return false;">Администратор кирүү</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Биз менен байланышта болуңуз</h3>
+                    <p>📞 +996 (501) 11-77-50</p>
+                    <p>📧 madaniyat83@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025-2026 №16 "Маданият" орто мектеби. Бардык укуктар корголгон.</p>
+                <p>Иштелип чыккан: Санариптик технологиялар бөлүмү</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+   <script src="./script.js"></script>
+</body>
+
+</html>

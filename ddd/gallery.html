@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мектеп галереясы</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f8ff;
+}
+
+header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  background:white;
+  border-bottom:1px solid #ddd;
+}
+
+.back{
+  font-size:16px;
+  padding:8px 12px;
+  border-radius:8px;
+  border:none;
+  background:#eee;
+  cursor:pointer;
+}
+
+.title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.role-box{
+  display:flex;
+  gap:10px;
+  padding:15px;
+}
+
+.role-box button{
+  flex:1;
+  padding:14px;
+  font-size:16px;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+}
+
+.admin{background:#ffdddd;}
+.director{background:#dde9ff;}
+
+.upload-btn{
+  display:none;
+  margin:20px;
+  padding:26px;
+  border:2px dashed #aaa;
+  border-radius:16px;
+  text-align:center;
+  font-size:20px;
+  background:white;
+  cursor:pointer;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:12px;
+  padding:12px;
+}
+
+.card{
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  background:white;
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.delete{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:rgba(0,0,0,.6);
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* МОДАЛ */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal.active{display:flex;}
+
+.modal-box{
+  background:white;
+  padding:20px;
+  width:90%;
+  max-width:340px;
+  border-radius:16px;
+}
+
+.modal-box input{
+  width:100%;
+  padding:16px;
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.modal-box button{
+  width:100%;
+  padding:14px;
+  margin-top:6px;
+}
+
+/* FILE INPUT ЖАШЫРУУ */
+#fileInput{
+  position:absolute;
+  left:-9999px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="back" onclick="history.back()">⬅ Артка</button>
+  <div class="title">📸 Мектеп галереясы</div>
+</header>
+
+<div class="role-box">
+  <button class="admin" onclick="openLogin('admin')">👨‍💻 Админ</button>
+  <button class="director" onclick="openLogin('director')">👨‍🏫 Директор</button>
+</div>
+
+<div class="upload-btn" id="uploadBtn" onclick="openUpload()">➕ Сүрөт жүктөө</div>
+
+<input type="file" id="fileInput" multiple accept="image/*">
+<div class="gallery" id="gallery"></div>
+
+<!-- ЛОГИН МОДАЛ -->
+<div id="loginModal" class="modal">
+  <div class="modal-box">
+    <h3 id="loginTitle"></h3>
+    <input type="password" id="passwordInput" placeholder="Пароль жазыңыз">
+    <button onclick="checkPassword()">Кирүү</button>
+    <button onclick="closeModal()">Жабуу</button>
+  </div>
+</div>
+
+<script>
+/* ПАРОЛДОР (окуу үчүн гана) */
+const ADMIN_PASSWORD="admin123";
+const DIRECTOR_PASSWORD="director123";
+
+/* CLOUDINARY */
+const cloudName="dlwefdxd8";
+const uploadPreset="gallery_upload";
+const folderName="gallery";
+
+let role=null;
+let selectedRole=null;
+
+const gallery=document.getElementById("gallery");
+const fileInput=document.getElementById("fileInput");
+const uploadBtn=document.getElementById("uploadBtn");
+
+/* САКТАЛГАН СҮРӨТТӨР */
+let images=JSON.parse(localStorage.getItem("images")||"[]");
+images.forEach(addCard);
+
+/* ЛОГИН */
+function openLogin(type){
+  selectedRole=type;
+  document.getElementById("loginTitle").innerText=
+    type==="admin" ? "Админ кирүү" : "Директор кирүү";
+  document.getElementById("loginModal").classList.add("active");
+}
+
+function closeModal(){
+  document.getElementById("loginModal").classList.remove("active");
+}
+
+function checkPassword(){
+  const pass=document.getElementById("passwordInput").value;
+
+  if(
+    (selectedRole==="admin" && pass===ADMIN_PASSWORD) ||
+    (selectedRole==="director" && pass===DIRECTOR_PASSWORD)
+  ){
+    role=selectedRole;
+    uploadBtn.style.display="block";
+    alert("Ийгиликтүү кирди");
+    document.getElementById("passwordInput").value="";
+    closeModal();
+  }else{
+    alert("Пароль туура эмес");
+  }
+}
+
+/* ЖҮКТӨӨ */
+function openUpload(){
+  if(!role) return alert("Алгач кириңиз");
+  fileInput.click();
+}
+
+fileInput.onchange=()=>{
+  [...fileInput.files].forEach(uploadImage);
+};
+
+function uploadImage(file){
+  const fd=new FormData();
+  fd.append("file",file);
+  fd.append("upload_preset",uploadPreset);
+  fd.append("folder",folderName);
+
+  fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,{
+    method:"POST",
+    body:fd
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    images.unshift(d.secure_url);
+    localStorage.setItem("images",JSON.stringify(images));
+    addCard(d.secure_url);
+  })
+  .catch(()=>alert("Жүктөөдө ката"));
+}
+
+function addCard(url){
+  const card=document.createElement("div");
+  card.className="card";
+
+  const img=document.createElement("img");
+  img.src=url;
+
+  card.appendChild(img);
+
+  if(role==="admin"){
+    const del=document.createElement("button");
+    del.className="delete";
+    del.innerHTML="🗑️";
+    del.onclick=()=>{
+      images=images.filter(i=>i!==url);
+      localStorage.setItem("images",JSON.stringify(images));
+      card.remove();
+    };
+    card.appendChild(del);
+  }
+
+  gallery.prepend(card);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Өнүктүрүү - Билим берүү мекемеси</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .programs-section {
+            margin-bottom: 3rem;
+        }
+
+        .programs-section > h2 {
+            text-align: center;
+            color: #f5576c;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .program-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .program-title {
+            flex: 1;
+        }
+
+        .program-title h3 {
+            color: #f5576c;
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .program-content ul {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .program-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+        }
+
+        .program-content li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        .program-description {
+            background: #fff5f7;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #f5576c;
+            margin-top: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .results-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-item {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .program-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Өнүктүрүү</h1>
+        <p>Окуучулардын ар тараптуу өнүгүүсүнө шарт түзүүчү тарбиялык жана билим берүү иш-чаралары</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-section">
+            <p>
+                Өнүктүрүү — бул окуучулардын ар тараптуу өнүгүүсүнө шарт түзүүчү тарбиялык жана билим берүү 
+                иш-чараларынын жыйындысы. Мектепте окуучунун жөндөмүн ачуу, кызыгуусун колдоо жана коомго 
+                пайдалуу инсан катары калыптандыруу негизги максат болуп саналат.
+            </p>
+        </div>
+
+        <div class="programs-section">
+            <h2>Ар тараптуу өнүктүрүү үчүн үйрөмөлөр жана секциялар</h2>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🎨</div>
+                    <div class="program-title">
+                        <h3>Чыгармачыл багыт</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <ul>
+                        <li>Сүрөт тартуу жана кол өнөрчүлүк</li>
+                        <li>Музыка, вокал жана бий</li>
+                        <li>Театр жана сахналык өнөр</li>
+                    </ul>
+                    <div class="program-description">
+                        Бул үйрөмөлөр окуучулардын чыгармачылык ой жүгүртүүсүн жана эстетикалык табитин өнүктүрөт.
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">⚽</div>
+                    <div class="program-title">
+                        <h3>Спорттук секциялар</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <ul>
+                        <li>Футбол, волейбол, баскетбол</li>
+                        <li>Ден соолукту чыңдоочу көнүгүүлөр</li>
+                        <li>Шахмат жана интеллектуалдык оюндар</li>
+                    </ul>
+                    <div class="program-description">
+                        Спорттук секциялар ден соолукту чыңдоого, тартипке жана командалык ишке үйрөтөт.
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">💻</div>
+                    <div class="program-title">
+                        <h3>Интеллектуалдык жана технологиялык багыт</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <ul>
+                        <li>Компьютердик сабаттуулук</li>
+                        <li>Робототехника жана программалоо</li>
+                        <li>Логикалык оюндар жана дебат клубу</li>
+                    </ul>
+                    <div class="program-description">
+                        Бул багыт окуучулардын аналитикалык ой жүгүртүүсүн жана заманбап технологияларды өздөштүрүүсүн камсыздайт.
+                    </div>
+                </div>
+            </div>
+
+            <div class="program-card">
+                <div class="program-header">
+                    <div class="program-icon">🤝</div>
+                    <div class="program-title">
+                        <h3>Социалдык жана тарбиялык иш-чаралар</h3>
+                    </div>
+                </div>
+                <div class="program-content">
+                    <ul>
+                        <li>Лидерлик жана өзүн-өзү башкаруу клубдары</li>
+                        <li>Коомдук иш-чаралар жана ыктыярчылык</li>
+                        <li>Маданий жана тарбиялык жолугушуулар</li>
+                    </ul>
+                    <div class="program-description">
+                        Бул иш-чаралар окуучулардын жоопкерчилигин, өзүнө ишенимин жана коом менен иштешүү жөндөмүн арттырат.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2>Өнүктүрүүнүн натыйжалары</h2>
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-icon">🌟</div>
+                    <h3>Талант ачылат</h3>
+                    <p>Окуучулардын жөндөмү жана таланты ачылат</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">💪</div>
+                    <h3>Активдүү инсандар</h3>
+                    <p>Өзүнө ишенген, активдүү инсандар калыптанат</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">⏰</div>
+                    <h3>Пайдалуу убакыт</h3>
+                    <p>Бош убакыт пайдалуу жана натыйжалуу өткөрүлөт</p>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">🎯</div>
+                    <h3>Келечекке даярдык</h3>
+                    <p>Окуучулар келечектеги кесипти тандоого даярданат</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Билим берүү мекемеси. Бардык укуктар корголгон.</p>
+    </footer>
+</body>
+</html>
